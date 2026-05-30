@@ -1,0 +1,7 @@
+# Local run logs
+*.log
+
+# Go build outputs
+*.exe
+*.test
+bin/
