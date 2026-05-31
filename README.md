@@ -23,6 +23,11 @@ go test ./...
 
 ## Docker
 
+The Dockerfile pulls base images through the Xuanyuan mirror:
+
+- `qp2pdj7hsiudzdknli.xuanyuan.run/library/golang:1.22-alpine`
+- `qp2pdj7hsiudzdknli.xuanyuan.run/library/alpine:3.23`
+
 ```powershell
 docker build -t learn-dev-backend .
 docker run --rm -p 8080:8080 learn-dev-backend
