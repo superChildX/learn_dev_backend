@@ -28,16 +28,20 @@ type LoginResponse struct {
 }
 
 func main() {
+	addr := ":8080"
+	log.Printf("server listening on http://localhost%s", addr)
+	if err := http.ListenAndServe(addr, appHandler()); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func appHandler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", hello)
 	mux.HandleFunc("/api/login", login)
 	mux.Handle("/api/items", authMiddleware(http.HandlerFunc(listItems)))
 
-	addr := ":8080"
-	log.Printf("server listening on http://localhost%s", addr)
-	if err := http.ListenAndServe(addr, corsMiddleware(mux)); err != nil {
-		log.Fatal(err)
-	}
+	return corsMiddleware(mux)
 }
 
 func corsMiddleware(next http.Handler) http.Handler {
